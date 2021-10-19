@@ -1,8 +1,10 @@
 import express from "express";
-import { addSalon } from "../controllers/Salon";
+import { addSalon, getSalon } from "../controllers/Salon";
+import formidable from "express-formidable";
 
 const router = express.Router();
 
-router.get("/", addSalon);
+router.post("/salon", formidable(), addSalon);
+router.get("/salon", getSalon);
 
 module.exports = router;
