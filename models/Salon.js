@@ -25,7 +25,7 @@ const salonSchema = new Schema(
     //   },
     // ],
     images: {
-      type: Buffer,
+      data: Buffer,
       contentType: String,
     },
     openTime: {
