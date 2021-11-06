@@ -40,6 +40,21 @@ const salonSchema = new Schema(
       type: String,
       required: true,
     },
+    parking: {
+      type: Boolean,
+      default: false,
+    },
+    wifi: {
+      type: Boolean,
+      default: false,
+    },
+    ac: {
+      type: Boolean,
+      default: false,
+    },
+    grade: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

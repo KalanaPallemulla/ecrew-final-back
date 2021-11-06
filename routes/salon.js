@@ -1,5 +1,10 @@
 import express from "express";
-import { addSalon, getSalon } from "../controllers/Salon";
+import {
+  addSalon,
+  getSalon,
+  addLocation,
+  getLocations,
+} from "../controllers/Salon";
 import formidable from "express-formidable";
 import Salon from "../models/Salon";
 
@@ -21,5 +26,8 @@ router.get("/salon/image/:id", async (req, res) => {
     console.log(error);
   }
 });
+
+router.post("/salon/locations", addLocation);
+router.get("/salon/locations", getLocations);
 
 module.exports = router;

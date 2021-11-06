@@ -1,12 +1,13 @@
 import Salon from "../models/Salon";
 import fs from "fs";
+import Location from "../models/Location";
 
 export const addSalon = async (req, res) => {
   console.log("MMMMM");
   try {
     const fields = req.fields;
     const files = req.files;
-    console.log(files.image);
+    // console.log(files.image);
 
     const { name, location, contact, openTime, closeTime } = fields;
 
@@ -35,6 +36,8 @@ export const addSalon = async (req, res) => {
       salon.images.data = fs.readFileSync(files.image.path);
       salon.images.contentType = files.image.type;
     }
+
+    console.log(salon);
 
     salon.save((err, result) => {
       if (err) {
@@ -66,4 +69,38 @@ export const getSalon = async (req, res) => {
       msg: err.message,
     });
   }
+};
+
+export const addLocation = async (req, res) => {
+  let loc = req.body;
+  console.log(loc);
+  const { addLocation } = loc;
+  let name = addLocation;
+  let location = await Location.findOne({ name });
+  console.log(location);
+
+  if (!location) {
+    if (name == "") return res.status(400).send("Name cannot be empty");
+    location = new Location({ name });
+
+    await location.save((err, result) => {
+      if (err) return res.status(400).send({ err });
+      return res.status(200).json(result);
+    });
+  } else {
+    return res.status(400).send({ msg: "Location already added" });
+  }
+
+  // location = new Location(loc);
+
+  // await location.save((err, result) => {
+  //   if (err) return res.status(400).send({ err });
+  //   return res.status(200).json(result);
+  // });
+};
+
+export const getLocations = async (req, res) => {
+  let location = await Location.find().exec();
+
+  return res.status(200).json(location);
 };
