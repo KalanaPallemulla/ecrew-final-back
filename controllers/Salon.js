@@ -9,6 +9,8 @@ export const addSalon = async (req, res) => {
     const files = req.files;
     // console.log(files.image);
 
+    console.log(fields);
+
     const { name, location, contact, openTime, closeTime } = fields;
 
     //Validations
@@ -73,7 +75,6 @@ export const getSalon = async (req, res) => {
 
 export const addLocation = async (req, res) => {
   let loc = req.body;
-  console.log(loc);
   const { addLocation } = loc;
   let name = addLocation;
   let location = await Location.findOne({ name });
@@ -100,7 +101,61 @@ export const addLocation = async (req, res) => {
 };
 
 export const getLocations = async (req, res) => {
-  let location = await Location.find().exec();
+  try {
+    let location = await Location.find().exec();
+    if (!location) {
+      return res.status(400).send("There is no locations");
+    }
 
-  return res.status(200).json(location);
+    res.json(location);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send("Server Error");
+  }
+};
+
+export const getSingleSalon = async (req, res) => {
+  try {
+    let salon = await Salon.findById(req.params.id);
+
+    if (!salon) {
+      return res.status(400).send("There is no salon for this id");
+    }
+
+    res.json(salon);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send("Server Error");
+  }
+};
+
+export const removeSalon = async (req, res) => {
+  try {
+    let salon = await Salon.findById(req.params.id);
+    if (salon) {
+      await Salon.findByIdAndDelete(req.params.id);
+      res.send("Salon Deleted");
+    } else {
+      return res.status(400).send("There is no salon for this id");
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send("Server Error");
+  }
+};
+
+export const updateSalon = async (req, res) => {
+  try {
+    let fields = req.fields;
+
+    let data = { ...fields };
+
+    let update = await Salon.findByIdAndUpdate(req.params.id, data, {
+      new: true,
+    }).exec();
+    res.json("Updated");
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send("Server Error");
+  }
 };

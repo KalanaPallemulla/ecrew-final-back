@@ -12,18 +12,6 @@ const salonSchema = new Schema(
       type: String,
       required: "Location is required",
     },
-    // features: [
-    //   {
-    //     service: {
-    //       type: String,
-    //       required: "Service is required",
-    //     },
-    //     price: {
-    //       type: String,
-    //       required: "Price is required",
-    //     },
-    //   },
-    // ],
     images: {
       data: Buffer,
       contentType: String,
@@ -52,9 +40,14 @@ const salonSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    card: {
+      type: Boolean,
+      default: false,
+    },
     grade: {
       type: String,
     },
+    salonType: { type: String },
   },
   { timestamps: true }
 );
