@@ -159,3 +159,29 @@ export const updateSalon = async (req, res) => {
     return res.status(400).send("Server Error");
   }
 };
+
+export const active = async (req, res) => {
+  try {
+    let salon = await Salon.findByIdAndUpdate(req.params.id, {
+      active: 1,
+    });
+
+    res.send("active");
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send("Server Error");
+  }
+};
+
+export const deactivate = async (req, res) => {
+  try {
+    let salon = await Salon.findByIdAndUpdate(req.params.id, {
+      active: 0,
+    });
+
+    res.send("deactivated");
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send("Server Error");
+  }
+};

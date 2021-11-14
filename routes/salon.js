@@ -7,6 +7,8 @@ import {
   getSingleSalon,
   removeSalon,
   updateSalon,
+  active,
+  deactivate,
 } from "../controllers/Salon";
 import formidable from "express-formidable";
 import Salon from "../models/Salon";
@@ -36,5 +38,9 @@ router.get("/salon/locations", getLocations);
 router.get("/salon/:id", getSingleSalon);
 router.delete("/salon/:id", removeSalon);
 router.put("/salon/:id", formidable(), updateSalon);
+router.put("/salon/:id", formidable(), updateSalon);
+router.put("/salon/active/:id", active);
+
+router.put("/salon/deactivate/:id", deactivate);
 
 module.exports = router;

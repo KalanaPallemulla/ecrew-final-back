@@ -48,6 +48,10 @@ const salonSchema = new Schema(
       type: String,
     },
     salonType: { type: String },
+    active: {
+      type: Number,
+      default: 1,
+    },
   },
   { timestamps: true }
 );
