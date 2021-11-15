@@ -29,6 +29,9 @@ export const addSalon = async (req, res) => {
     if (!closeTime) {
       return res.status(400).send({ msg: "Close Time is required" });
     }
+    if (!address) {
+      return res.status(400).send({ msg: "Close Time is required" });
+    }
 
     // if (!features) return res.status(400).send({ msg: "Features is required" });
 

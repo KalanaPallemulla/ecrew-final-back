@@ -28,6 +28,10 @@ const salonSchema = new Schema(
       type: String,
       required: true,
     },
+    address: {
+      type: String,
+      required: true,
+    },
     parking: {
       type: Boolean,
       default: false,
