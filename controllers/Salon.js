@@ -11,7 +11,7 @@ export const addSalon = async (req, res) => {
 
     console.log(fields);
 
-    const { name, location, contact, openTime, closeTime } = fields;
+    const { name, location, contact, openTime, closeTime, address } = fields;
 
     //Validations
     if (!name) {
@@ -30,7 +30,7 @@ export const addSalon = async (req, res) => {
       return res.status(400).send({ msg: "Close Time is required" });
     }
     if (!address) {
-      return res.status(400).send({ msg: "Close Time is required" });
+      return res.status(400).send({ msg: "Address is required" });
     }
 
     // if (!features) return res.status(400).send({ msg: "Features is required" });

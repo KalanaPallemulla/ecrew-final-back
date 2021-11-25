@@ -51,10 +51,17 @@ const salonSchema = new Schema(
     grade: {
       type: String,
     },
+    description: {
+      type: String,
+    },
     salonType: { type: String },
     active: {
       type: Number,
       default: 1,
+    },
+    salonSubType: {
+      type: String,
+      required: true,
     },
   },
   { timestamps: true }
