@@ -63,6 +63,9 @@ const salonSchema = new Schema(
       type: String,
       required: true,
     },
+    verified: {
+      type: Boolean,
+    },
   },
   { timestamps: true }
 );
